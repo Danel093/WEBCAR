@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WordPress Documentation</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/bootstrap.css" media="screen">
+  <link rel="stylesheet" href="css/responsive.css" media="screen">
+  <link rel="stylesheet" href="css/style.css" media="screen">
+  <link rel="stylesheet" href="css/flexslider.css"  media="screen">
+  <link rel="stylesheet" href="css/prettify.css"  media="screen">
+  <link rel="stylesheet" href="css/prettyPhoto.css"  media="screen">
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.scrollTo.js"></script>
+  <script src="js/jquery-migrate-1.1.0.js"></script>
+  <script src="js/prettify.js"></script>
+  <script src="js/jquery.flexslider.js"></script>
+  <script src="js/bootstrap-affix.js"></script>
+  <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script> 
+  <link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+  
+  <script>    
+    $(document).ready(function() {	
+  		$('.flexslider').flexslider({
+  		  animation: "fade",      
+  		  slideshow: false,     
+  		  slideshowSpeed: 7000,
+  		  animationDuration: 0,
+  		  prevText: "",
+  		  nextText: "",
+  		  controlNav: true,
+  		}) 		
+
+
+
+// hide #back-top first
+  $("#back-top").hide();
+  
+  // fade in #back-top
+  $(function () {
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 100) {
+        $('#back-top').fadeIn();
+      } else {
+        $('#back-top').fadeOut();
+      }
+    });
+
+    // scroll body to 0px on click
+    $('#back-top a').click(function () {
+      $('body,html').animate({
+        scrollTop: 0
+      }, 400);
+      return false;
+    });
+  });	
+			
+
+// prettyphoto init
+        $("a[data-gal^='prettyPhoto']").prettyPhoto({
+          animationSpeed:'slow',
+          theme:'facebook',
+          slideshow:false,
+          autoplay_slideshow: false,
+          show_title: true,
+          overlay_gallery: false
+        }).append('<span></span>').hover(
+          function(){
+            $(this).find('>img').stop().animate({opacity:.5})
+          },
+          function(){
+            $(this).find('>img').stop().animate({opacity:1})
+          }
+        );		
+        
+// slide-down-box-------------------------------  
+      var idArray = [],
+          click_scroll = false;
+      $("#nav a").each(function(index){
+        idArray[index]=$(this).attr("href");
+      });
+      
+      $('ul.list li a').prepend('<i class="icon-sample"></i>');
+      $('li:first-child', "#nav").addClass('first');
+      $('li:last-child', "#nav").addClass('last');
+
+      $("#affect_all").toggle(
+        function(){
+          $("#nav>li").not(".act_item").addClass("open_item").find("dd").stop(true).slideDown(200);
+          $(this).find('.expand').hide();
+          $(this).find('.close').show();
+        },
+        function(){
+          $("#nav>li").not(".act_item").removeClass("open_item").find("dd").stop(true).slideUp(200);
+          $(this).find('.expand').show();
+          $(this).find('.close').hide();
+        }
+      );
+      $(".slide-down dt i").click(function(){
+        $(this).parents("li").toggleClass("open_item").find('dd').slideToggle(300);
+        return false;
+      });
+      $(".slide-down a").click(function(){
+        click_scroll = true;
+        $(window).scrollTo($(this).attr("href"), 800, function(){
+          click_scroll = false;
+          change_menu_item();
+        });
+        return false;
+      });
+      $(window).scroll(change_menu_item).trigger("scroll");
+      function change_menu_item(){
+        if(!click_scroll){
+          $(".current").removeClass("current");
+          $(".act_item").removeClass("act_item");
+          $(".open_item").removeClass("open_item");
+          for(var i=0, lenghtArray = idArray.length; i<lenghtArray; i++){
+            if($(idArray[i]).offset().top-$(window).scrollTop()<=(($(window).height()/2)-100) && $(idArray[i]).offset().top-$(window).scrollTop()>=0 || $(window).scrollTop()+(($(window).height()/2)-100)>$(idArray[i]).offset().top && $(idArray[i]).offset().top+$(idArray[i]).height()>$(window).scrollTop()+(($(window).height()/2))){
+              $("a[href="+idArray[i]+"]").parent("li").addClass("current");
+              $("a[href="+idArray[i]+"]").parents("li").addClass("act_item open_item");
+            }
+          }
+          $(".act_item").find("dd").slideDown(200);
+          $("li", '#nav').not(".act_item").find("dd").stop().slideUp(200);
+        }
+      }
+    })  
+    !function ($) {
+      $(function(){	
+        var $window = $(window)		
+        // make code pretty
+        window.prettyPrint && prettyPrint()
+        // side bar
+        $('#nav_container').affix({
+          offset: {
+            top: 80		
+          }
+        })
+      })
+    }(window.jQuery)  
+  </script>    
+
+    <!--[if lt IE 8]>
+    <div style=' clear: both; text-align:center; position: relative;'>
+      <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" alt="" /></a>
+    </div>
+ 	  <![endif]-->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>  
+
+<!-- header
+================================================== -->
+<header class="header">
+  <div class="container">
+  <div class="row">
+  <article class="span4"><a class="brand" target="_blank"></a></article>
+  <article class="span8">
+  <h1 class="img-thumbnail" alt="header"
+        style="text-align:justify; line-height:50pt; font-family:Irish Grover; font-size:45pt">
+
+        <span style="font-family:Irish Grover; font-size:45pt">WEB</span>CAR</h1>
+        
+
+        <p style="text-align:justify; line-height:20pt">
+            <span style="font-family:Josefin Sans; font-size:20pt">VIAJA CON ESTILO Y COMODIDAD</span>
+            <span style="font-family:Josefin Sans; font-size:28pt; letter-spacing:9pt"> </span>
+        </p>    
+        
+        <h3
+            style="text-align:justify; line-height:0%">
+            <span style="font-family:Calibri; font-size:11pt; letter-spacing:2pt">INICIO</span>
+            <span style= "font-size:15pt">|</span>
+            <span style="font-family:Calibri; font-size:11pt; letter-spacing:2pt">EVENTOS</span>
+            <span style= "font-size:15pt">|</span>
+            <span style="font-family:Calibri; font-size:11pt; letter-spacing:2pt">NOTICIAS</span>
+            <span style= "font-size:15pt">|</span>
+            <span style="font-family:Calibri; font-size:11pt; letter-spacing:2pt">CONTÁCTANOS</span>
+            <span style= "font-size:15pt">|</span>
+            <span style="font-family:Calibri; font-size:11pt; letter-spacing:2pt">INGRESO</span>
+            <span style= "font-size:15pt">|</span>
+            <span style="font-family:Calibri; font-size:11pt; letter-spacing:2pt">BUSCAR</span>
+            <img src="img/barra-de-busqueda.png float: left" alt="">
+        </h3>
+  </article>   
+  </div>  	
+  </div>
+</header>
+<div id="content"> 
+<div class="bg-content-top">
+<div class="container">
+
+<!-- Docs nav
+    ================================================== -->
+  <div class="row">
+      <div class="span3"> 
+
+        <div id="nav_container">
+          <a href="javascript:;" id="affect_all">
+            <span class="expand">
+              <i class="icon-angle-down"></i>
+            </span>            
+            <span class="close">
+              <i class="icon-angle-up"></i>
+            </span>
+          </a>
+            <div class="row-fluid"></div>    
+                <ul class="nav nav-list bs-docs-sidenav"  id="nav">
+                  <li class="nav-item item1">
+                    <dl class="slide-down">
+                      <dt><a href="#servicios" class="icon-info-sign">Servicios</a></dt>
+                      <dd></dd>
+                    </dl>   
+                  </li>
+
+                  <li class="nav-item item3">
+                    <dl class="slide-down">
+                      <dt><a href="#autos" class="icon-play">Autos </a> <i class="icon-sample"></i></dt>
+                        <dd>
+                          <ul class="list">          
+                            <li><a href="#auto_familiar">Auto Familiar</a></li>
+                            <li><a href="#auto_deportivo">Auto Deportivo</a></li>
+                            <li><a href="#auto_pequeño">Auto Pequeño</a></li>
+                            <li><a href="#auto_offroad">Offroad</a></li>
+                            <li><a href="#camper">Camper</a></li>
+                            <li><a href="#oferta_auto">Oferta</a></li>
+                          </ul> 
+                      </dd>
+                    </dl> 
+                  </li>
+
+                  <li class="nav-item item3">
+                    <dl class="slide-down">
+                      <dt><a href="#motos" class="icon-play">Motos </a> <i class="icon-sample"></i></dt>
+                        <dd>
+                          <ul class="list">
+                            <li><a href="#moto_viajera">Moto Viajera</a></li>          
+                            <li><a href="#moto_deportiva">Moto Deportiva</a></li>
+                            <li><a href="#moto_offroad">Offroad</a></li>
+                            <li><a href="#bajo_cilindraje">Bajo Cilindraje</a></li>
+                            <li><a href="#oferta_moto">Oferta</a></li>
+                          </ul> 
+                      </dd>
+                    </dl> 
+                  </li>
+                  
+                  <li class="nav-item item5">
+                    <dl class="slide-down">
+                      <dt><a href="#terminos_y_contratos" class="icon-file-alt">Términos y Contratos</a></dt>
+                      <dd></dd>
+                    </dl> 
+                  
+                  <li class="nav-item item7">
+                    <dl class="slide-down">
+                      <dt><a href="#portafolio_productos" class="icon-picture">Portafolio de Productos </a></dt>
+                        <dd></dd>
+                    </dl> 
+                  </li> 
+
+                  </li> 
+                  <li class="nav-item item11">
+                  <dl class="slide-down">
+                      <dt><a href="#carrito" class="icon-shopping-cart">Carrito </a></dt>
+                      <dd></dd>
+                    </dl> 
+                  </li> 
+                  
+                </ul>
+            </div>
+      </div>
+      
+<div class="span9">
+
+<!-- box-content
+==================================================-->
+<!--CARRUSEL-->
+<!--<div class="box-content"-->
+<!--CARRUSEL-->
+<!--<section class="block-templates"  id="getting_started">
+  <div id="carouselExampleIndicators" class="slider-container" data-ride="carousel">
+    <div id="container">
+        <div class="bg-content-top">
+        <div class="container">
+    <div class="carousel-inner">
+        <div class="slider-container img">
+            <img src="img/Toyota-hudson.jpg" class="d-block w-100" alt="Auto 1">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Alquila el auto de tu preferencia</h5>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="img/Pulsar-NS-200.jpg" class="d-block w-100" alt="Auto 2">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Explora la ciudad en dos ruedas</h5>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="img/Mercedez-Benz-GL.jpg" class="d-block w-100" alt="Auto 3">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Viaja con estilo y comodidad</h5>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="img/Husqvarna-Norden-901.jpg" class="d-block w-100" alt="Auto 4">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Diviértete en el camino</h5>
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Siguiente</span>
+    </a>
+</div>
+-->
+
+
+<div class="box-content">
+  <!-- block-started
+  ================================================== -->
+  <section class="block-started"  id="servicios">
+    <h3><i class="icon-info-sign"></i>Servicios</h3>
+
+    <p>Somos una agencia dedicada al préstamo de vehículos automotores como autos y motos.</p>
+    <p>Alquilamos vehículos de calidad a buen precio.</p>
+    <p>Puedes escoger variedad de opciones de autos: Vann, Offroad, Camper, Coche.</p>
+    <p>También deberías ir a ver nuestras motos de la linea deportiva como la Yamaha R5 y montaña como la Husqvarna Norden.</p>
+    <p>Mira nuestras ofertas especiales por poco tiempo. Y no te preocupes, tenemos diferentes métodos de pago</p>
+
+<!------Autos------>
+<div class="container mt-5">
+  <div class="row">
+    
+  <section class="block-started"  id="autos">
+    <h3><i class="icon-play"></i>Autos</h3>
+
+    <div id="auto_familiar">
+      <h4>Auto Familiar</h4>
+
+          <div class="col-md-4">
+            <div class="card">
+              <img src="img/Toyota-hudson.jpg" class="card-img-top" alt="Auto 1">
+              <div class="card-body">
+                <h5 class="card-title">Encuentra el auto perfecto para tu viaje.</h5>
+                <p class="card-text">TOYOTA HUDSON</p>
+                <a href="#" class="btn btn-primary">Ver Más</a>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div id="auto_deportivo">
+      <h4>Auto Deportivo</h4>
+  
+          <div class="col-md-4">
+            <div class="card">
+              <img src="img/Kia-EV6.jpg" class="card-img-top" alt="Auto 2">
+              <div class="card-body">
+                <h5 class="card-title">Alquila el auto de tu preferencia.</h5>
+                <p class="card-text">KIA EV-6</p>
+                <a href="#" class="btn btn-primary">Ver Más</a>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div id="auto_pequeño">
+      <h4>Auto Pequeño</h4>
+  
+          <div class="col-md-4">
+            <div class="card">
+              <img src="img/renault-twingo.jpg" class="card-img-top" alt="Auto 3">
+              <div class="card-body">
+                <h5 class="card-title">Alquila un auto sencillo.</h5>
+                <p class="card-text">RENAULT TWINGO</p>
+                <a href="#" class="btn btn-primary">Ver Más</a>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div id="auto_offroad">
+      <h4>Offroad</h4>
+  
+          <div class="col-md-4">
+            <div class="card">
+              <img src="img/Toyota-Land-Cruiser.jpg" class="card-img-top" alt="Auto 4">
+              <div class="card-body">
+                <h5 class="card-title">Alquila un auto para cualquier camino duro.</h5>
+                <p class="card-text">TOYOTA LAND CRUISER</p>
+                <a href="#" class="btn btn-primary">Ver Más</a>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div id="camper">
+      <h4>Camper</h4>
+  
+          <div class="col-md-4">
+            <div class="card">
+              <img src="img/Volkswagen-Westfalia-Camper.jpg" class="card-img-top" alt="Auto 5">
+              <div class="card-body">
+                <h5 class="card-title">Puedes tener la comodidad que desees.</h5>
+                <p class="card-text">VOLKSWAGEN WESTFALIA CAMPER</p>
+                <a href="#" class="btn btn-primary">Ver Más</a>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div id="oferta_auto">
+      <h4>Oferta</h4>
+  
+          <div class="col-md-4">
+            <div class="card">
+              <img src="img/Volvo-XC90.jpg" class="card-img-top" alt="Auto 6">
+              <div class="card-body">
+                <h5 class="card-title">Un excelente candidato al mejor precio.</h5>
+                <p class="card-text">VOLVO XC90</p>
+                <a href="#" class="btn btn-primary">Ver Más</a>
+              </div>
+            </div>
+          </div>
+    </div>
+
+<!------Motos------>    
+  <section class="block-started"  id="motos">
+    <h3><i class="icon-play"></i>Motos</h3>
+
+    <div id="moto_viajera">
+      <h4>Moto Viajera</h4>
+
+          <div class="col-md-4">
+            <div class="card">
+              <img src="img/Pulsar-NS-200.jpg" class="card-img-top" alt="Moto 1">
+              <div class="card-body">
+                <h5 class="card-title">Explora la ciudad en dos ruedas.</h5>
+                <p class="card-text">PULSAR NS-200</p>
+                <a href="#" class="btn btn-primary">Ver Más</a>
+              </div>
+            </div>
+          </div>
+    </div>
+      
+    <div id="moto_deportiva">
+      <h4>Moto Deportiva</h4>
+  
+          <div class="col-md-4">
+            <div class="card">
+              <img src="img/Yamaha-R5.jpg" class="card-img-top" alt="Moto 2">
+              <div class="card-body">
+                <h5 class="card-title">Explora la ciudad en dos ruedas.</h5>
+                <p class="card-text">YAMAHA R5</p>
+                <a href="#" class="btn btn-primary">Ver Más</a>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div id="moto_offroad">
+      <h4>Offroad</h4>
+  
+          <div class="col-md-4">
+            <div class="card">
+              <img src="img/Husqvarna-Norden-901.jpg" class="card-img-top" alt="Moto 3">
+              <div class="card-body">
+                <h5 class="card-title">Explora la región.</h5>
+                <p class="card-text">HUSQVARNA NORDEN 901</p>
+                <a href="#" class="btn btn-primary">Ver Más</a>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div id="bajo_cilindraje">
+      <h4>Bajo Cilindraje</h4>
+  
+          <div class="col-md-4">
+            <div class="card">
+              <img src="img/Honda-cb125f.jpg" class="card-img-top" alt="Moto 4">
+              <div class="card-body">
+                <h5 class="card-title">Una moto sencilla de excelente rendimiento.</h5>
+                <p class="card-text">HONDA CB 125-F</p>
+                <a href="#" class="btn btn-primary">Ver Más</a>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div id="oferta_moto">
+      <h4>Oferta</h4>
+  
+          <div class="col-md-4">
+            <div class="card">
+              <img src="img/Triumph-Tamarit.jpg" class="card-img-top" alt="Moto 5">
+              <div class="card-body">
+                <h5 class="card-title">Viaja con estilo.</h5>
+                <p class="card-text">TRIUMPH TAMARIT</p>
+                <a href="#" class="btn btn-primary">Ver Más</a>
+              </div>
+            </div>
+          </div>
+    </div>
+
+
+
+
+<!---------TERMINOS--------->
+  <section class="block-started"  id="terminos_y_contratos">
+    <h3><i class="icon-file-alt"></i>Términos y Contratos</h3>
+
+    <p>Revisa los requerimientos para adquirir nuestros servicios.</p>
+    <p><a href="http://" target="_blank"><strong>AQUÍ</strong></a>
+
+
+<!---------PORTAFOLIO PRODUCTOS--------->
+<section class="block-started"  id="portafolio_productos">
+  <h3><i class="icon-picture"></i>Portafolio de Productos</h3>
+
+  <p>Adiciional a nuestros servicios de alquiler, somos distribuidores de kit de carretera, campins, moda motera, y demás.</p>
+  <p><a href="http://" target="_blank"><strong>Compra productos y artículos para tu viaje</strong></a>
+  <p><a href="http://" target="_blank"><strong>Descarga nuestro catálogo</strong></a>
+
+
+<!---------CARRITO--------->
+<section class="block-started"  id="carrito">
+  <h3><i class="icon-shopping-cart"></i>Carrito</h3>
+
+  <p>Añade a tus Servicios.</p>
+  <p><a href="http://" target="_blank"><strong>VER CARRITO</strong></a>
+</div>
+
+
+<!-- Shop kit end -->
+</div>
+</div>
+
+  </div>
+</div>
+</div>
+</div>
+   <!-- Footer
+    ================================================== -->
+    <footer>
+      <div class="container">        
+       DANIEL TORRES PINZÓN<br>
+      © 2024 WEBCAR
+      </div>
+    </footer>
+
+  <div id="back-top">
+    <a href="#"><i class="icon-double-angle-up"></i></a>
+  </div>    
+
+<!-- <script src="js/bootstrap-scrollspy.js"></script>  -->
+
+<script type="text/javascript">
+  var _gaq = _gaq || []; 
+  _gaq.push(['_setAccount', 'UA-2787305-5']); 
+  _gaq.push(['_trackPageview']); 
+
+  (function() { 
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; 
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; 
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); 
+  })();
+</script>
+    
+</body> 
+
+</html>
