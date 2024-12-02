@@ -207,6 +207,28 @@ header .brand {
   padding:75px;
   box-sizing: border-box;
 }
+.navegacion{
+  width: 60%;
+  max-width: 700px;
+  margin-left: 32pc;
+  padding: 1px 0;
+  align-items: center;
+}
+input[type="search"]{
+  padding: 1px;
+  padding-right: 5px;
+  border: none;
+}
+.search{
+  width: 60%;
+  max-width: 700px;
+  margin-left: auto;
+  padding: 0 1px;
+  background:#fff;
+  padding-bottom: 5px;
+  display: none;
+}
+
 /*------ content ------- */
 #content {
   background: url(../img/tail-content.gif);
